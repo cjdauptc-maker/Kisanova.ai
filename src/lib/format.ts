@@ -26,12 +26,18 @@ export function num(value: string | number | null | undefined): number | null {
   return Number.isNaN(n) ? null : n;
 }
 
+const SENTINEL = new Set(['', '—', '-', 'none', 'null', 'undefined', 'n/a']);
+
 export function formatFarmPlot(
   farmName: string | null | undefined,
   plotName: string | null | undefined,
 ): string {
-  const farm = farmName?.trim() || '';
-  const plot = plotName?.trim() || '';
+  const norm = (v: string | null | undefined) => {
+    const s = (v ?? '').trim().toLowerCase();
+    return SENTINEL.has(s) ? '' : (v ?? '').trim();
+  };
+  const farm = norm(farmName);
+  const plot = norm(plotName);
   if (!farm && !plot) return '—';
   if (!plot) return farm;
   if (!farm) return plot;

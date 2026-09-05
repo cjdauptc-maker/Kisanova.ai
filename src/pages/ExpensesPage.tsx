@@ -88,8 +88,8 @@ export function ExpensesPage() {
     }
   }, [preset]);
 
-  const farmName = (id: string | null) => farms.find((f) => f.id === id)?.name ?? '—';
-  const plotName = (id: string | null) => plots.find((p) => p.id === id)?.name ?? '—';
+  const farmName = (id: string | null) => farms.find((f) => f.id === id)?.name ?? '';
+  const plotName = (id: string | null) => plots.find((p) => p.id === id)?.name ?? '';
   const cropLabel = (id: string | null) => {
     const c = crops.find((x) => x.id === id);
     return c ? `${c.season_year} · ${c.variety ?? 'Paddy'}` : '—';
